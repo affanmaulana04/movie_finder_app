@@ -38,13 +38,11 @@ class FavoritesNotifier extends StateNotifier<List<Map<String, dynamic>>> {
       'actors': json.encode(movie['actors']),
     };
     await _dbHelper.addFavorite(movieDataToSave);
-    // Refresh state dari database untuk memastikan konsistensi
     _loadFavorites();
   }
 
   Future<void> removeFavorite(Map<String, dynamic> movie) async {
     await _dbHelper.removeFavorite(userId, movie['title']! as String);
-    // Refresh state dari database
     _loadFavorites();
   }
 }

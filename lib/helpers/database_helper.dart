@@ -7,7 +7,7 @@ import 'dart:convert';
 
 class DatabaseHelper {
   static const _databaseName = "MovieFinder.db";
-  static const _databaseVersion = 2; // Naikkan versi karena ada perubahan skema
+  static const _databaseVersion = 2;
 
   static const tableFavorites = 'favorites';
   static const tableUsers = 'users';
@@ -55,7 +55,6 @@ class DatabaseHelper {
           ''');
   }
 
-  // Handle upgrade database jika skema berubah
   Future _onUpgrade(Database db, int oldVersion, int newVersion) async {
     if (oldVersion < 2) {
       await db.execute("ALTER TABLE $tableFavorites ADD COLUMN genre TEXT");

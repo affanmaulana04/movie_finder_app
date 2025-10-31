@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_finder/helpers/database_helper.dart';
-import 'package:movie_finder/pages/home_page.dart';
-import 'package:shared_preferences/shared_preferences.dart'; // BARU
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -24,7 +23,6 @@ class _RegisterPageState extends State<RegisterPage> {
         'password': _passwordController.text,
       });
 
-      // BARU: Simpan ID pengguna ke SharedPreferences setelah berhasil mendaftar
       final prefs = await SharedPreferences.getInstance();
       await prefs.setInt('userId', newUserId);
 
@@ -33,10 +31,7 @@ class _RegisterPageState extends State<RegisterPage> {
         const SnackBar(content: Text('Pendaftaran berhasil!')),
       );
 
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => HomePage(userId: newUserId)),
-      );
+      Navigator.pushReplacementNamed(context, '/home', arguments: newUserId);
     }
   }
 
@@ -50,7 +45,6 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    // ... UI tetap sama, tidak ada perubahan di sini ...
     return Scaffold(
       appBar: AppBar(
         title: const Text('Buat Akun'),
